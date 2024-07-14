@@ -1,7 +1,60 @@
-import React from "react";
+import React, { KeyboardEvent, useEffect, useState } from "react";
 import { ContentWrapper } from "../utility/components/contentWrapper";
+import { HeaderShow } from "./header.types";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 
 export const Header: React.FC = () => {
+  const [show, setShow] = useState<HeaderShow>(HeaderShow.TOP);
+  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
+  const [lastScrollY, setLastScrollY] = useState<number>(0);
+  const [query, setQuery] = useState<string>("");
+  const [showSearch, setShowSearch] = useState<boolean>(false);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { user, logout } = useAuth();
+
+  const handleNavbar = () => {
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        setShow(HeaderShow.HIDE);
+      } else {
+        setShow(HeaderShow.SHOW);
+      }
+    } else {
+      setShow(HeaderShow.TOP);
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleNavbar);
+    return () => {
+      window.removeEventListener("scroll", handleNavbar);
+    };
+  }, [lastScrollY]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+  const handleSearchQuery = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter" && query?.length > 0) {
+      navigate(`/search/${query}`);
+      setTimeout(() => {
+        setShowSearch(false);
+      }, 1000);
+    }
+  };
+
+  const navigationHandler = (type: string) => {
+    if (type === "movie") {
+      navigate("/explore/movie");
+    } else {
+      navigate("/explore/tv");
+    }
+    setMobileMenu(false);
+  };
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
@@ -16,7 +69,7 @@ export const Header: React.FC = () => {
               type="text"
               placeholder="Search for a movie or tv show....."
               onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={searchQueryHandler}
+              onKeyUp={handleSearchQuery}
             />
           </div>
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
@@ -113,7 +166,7 @@ export const Header: React.FC = () => {
                 type="text"
                 placeholder="Search for a movie or tv show...."
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={searchQueryHandler}
+                onKeyUp={handleSearchQuery}
               />
             </div>
           </ContentWrapper>
