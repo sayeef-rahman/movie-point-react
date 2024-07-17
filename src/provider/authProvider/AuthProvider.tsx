@@ -11,7 +11,7 @@ import {
   signOut,
   updateProfile,
 } from "firebase/auth";
-import axios from "axios";
+// import axios from "axios";
 
 export const AuthContext = createContext<unknown | null>(null);
 const auth = getAuth(app);
@@ -39,24 +39,29 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   };
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
-      setUser(currentUser);
+    onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
-        axios
-          .post(`https://movie-app-server-eight.vercel.app/jwt`, {
-            email: currentUser.email,
-          })
-          .then((data) => {
-            localStorage.setItem("access-token", data.data.token);
-            setLoading(false);
-          });
-      } else {
-        localStorage.removeItem("access-token");
+        setUser(currentUser);
       }
     });
-    return () => {
-      unsubscribe();
-    };
+    // const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    //   if (currentUser) {
+    // setUser(currentUser);
+    //     axios
+    //       .post(`https://movie-app-server-eight.vercel.app/jwt`, {
+    //         email: currentUser?.email,
+    //       })
+    //       .then((data) => {
+    //         localStorage.setItem("access-token", data.data.token);
+    //         setLoading(false);
+    //       });
+    //   } else {
+    //     localStorage.removeItem("access-token");
+    //   }
+    // });
+    // return () => {
+    //   unsubscribe();
+    // };
   }, []);
 
   const logout = () => {
