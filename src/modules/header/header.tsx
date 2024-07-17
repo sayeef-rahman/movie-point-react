@@ -1,7 +1,12 @@
 import React, { KeyboardEvent, useEffect, useState } from "react";
+import { HiOutlineSearch } from "react-icons/hi";
+import { SlMenu } from "react-icons/sl";
+import { VscChromeClose } from "react-icons/vsc";
+import { NavLink, useLocation } from "react-router-dom";
+// import useAuth from "../../hooks/useAuth/useAuth";
 import { ContentWrapper } from "../utility/components/contentWrapper";
 import { HeaderShow } from "./header.types";
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import useAuth from "../../hooks/useAuth/useAuth";
 
 export const Header: React.FC = () => {
   const [show, setShow] = useState<HeaderShow>(HeaderShow.TOP);
@@ -9,9 +14,9 @@ export const Header: React.FC = () => {
   const [lastScrollY, setLastScrollY] = useState<number>(0);
   const [query, setQuery] = useState<string>("");
   const [showSearch, setShowSearch] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const location = useLocation();
-  const { user, logout } = useAuth();
+  // const [userProfile, setUserProfile] = useState({})
 
   const handleNavbar = () => {
     if (window.scrollY > 200) {
@@ -39,7 +44,7 @@ export const Header: React.FC = () => {
 
   const handleSearchQuery = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key === "Enter" && query?.length > 0) {
-      navigate(`/search/${query}`);
+      // navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
       }, 1000);
@@ -48,17 +53,28 @@ export const Header: React.FC = () => {
 
   const navigationHandler = (type: string) => {
     if (type === "movie") {
-      navigate("/explore/movie");
+      // navigate("/explore/movie");
     } else {
-      navigate("/explore/tv");
+      // navigate("/explore/tv");
     }
     setMobileMenu(false);
+  };
+
+  const handleSearch = () => {
+    setMobileMenu(false);
+    setShowSearch(true);
+  };
+
+  const openMobileMenu = () => {
+    setMobileMenu(true);
+    setShowSearch(false);
   };
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        <div className="logo" onClick={() => navigate("/")}>
+        {/* <div className="logo" onClick={() => navigate("/")}> */}
+        <div className="logo">
           <h1 className="text-red-700 font-extrabold text-3xl ">FilmHoliday</h1>
         </div>
 
@@ -96,37 +112,43 @@ export const Header: React.FC = () => {
               Subscription
             </NavLink>
           </li>
-          {user && (
+          {/* <>
+            {user && (
+              <li className="menuItem">
+                <Link
+                  to={
+                    isAdmin
+                      ? "/dashboard/adminhome"
+                      : "/dashboard/favoritevideos"
+                  }
+                >
+                  Dashboard
+                </Link>
+              </li>
+            )}
+          </> */}
+          {/* <>
+            {user && (
+              <li className="menuItem">
+                <Link to="/dashboard/userprofile">
+                  {user && (
+                    <RxAvatar
+                      alt="photo"
+                      title={userProfile?.name}
+                      src={
+                        userProfile?.photo
+                          ? userProfile?.photo
+                          : "https://cdn5.vectorstock.com/i/1000x1000/37/29/male-user-circle-icon-black-avatar-icon-user-vector-22753729.jpg"
+                      }
+                    />
+                  )}
+                </Link>
+              </li>
+            )}
+          </> */}
+          {/* <>{user ? (
             <li className="menuItem">
-              <Link
-                to={
-                  isAdmin ? "/dashboard/adminhome" : "/dashboard/favoritevideos"
-                }
-              >
-                Dashboard
-              </Link>
-            </li>
-          )}
-          {user && (
-            <li className="menuItem">
-              <Link to="/dashboard/userprofile">
-                {user && (
-                  <Avatar
-                    alt="photo"
-                    title={userProfile?.name}
-                    src={
-                      userProfile?.photo
-                        ? userProfile?.photo
-                        : "https://cdn5.vectorstock.com/i/1000x1000/37/29/male-user-circle-icon-black-avatar-icon-user-vector-22753729.jpg"
-                    }
-                  />
-                )}
-              </Link>
-            </li>
-          )}
-          {user ? (
-            <li className="menuItem">
-              <Link>
+              <Link to={""}>
                 <button
                   onClick={handleSignout}
                   className="bg-gradient-to-r from-red-600 to-red-950 hover:from-pink-500 hover:to-yellow-500 block mx-auto text-white text-sm uppercase rounded shadow-md px-6 py-2"
@@ -143,14 +165,14 @@ export const Header: React.FC = () => {
                 </button>
               </Link>
             </li>
-          )}
+          )}</> */}
           <li className="searchMenu">
-            <HiOutlineSearch onClick={openSearch} />
+            <HiOutlineSearch onClick={handleSearch} />
           </li>
         </ul>
 
         <div className="mobileMenuItems">
-          <HiOutlineSearch onClick={openSearch} />
+          <HiOutlineSearch onClick={handleSearch} />
           {mobileMenu ? (
             <VscChromeClose onClick={() => setMobileMenu(false)} />
           ) : (

@@ -1,13 +1,13 @@
 // import { UserCredential } from "firebase/auth";
 import { ReactNode } from "react";
 
-export interface AuthProviderProps {
-  children: ReactNode;
-}
-export interface CreateUserProps {
-  email: string;
-  password: string;
-}
+// export interface AuthProviderProps {
+//   children: ReactNode;
+// }
+// export interface CreateUserProps {
+//   email: string;
+//   password: string;
+// }
 
 // export interface authInfo {
 //   user: unknown;
