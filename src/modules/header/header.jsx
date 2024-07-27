@@ -1,9 +1,9 @@
 import React from "react";
 import { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import "./styles.scss"
+import "./styles.scss";
 
-export const Header = () => {
+const Header = () => {
   const [show, setShow] = useState("top");
   const [lastScrollY, setLastScrollY] = useState(0);
   const [mobileMenu, setMobileMenu] = useState(false);
@@ -208,3 +208,5 @@ export const Header = () => {
     </header>
   );
 };
+
+export default Header;

@@ -1,3 +1,4 @@
+
 import { configureStore } from "@reduxjs/toolkit";
 import { tmdbSlice } from "./features/movieDataBase/movieDataBase";
 
