@@ -1,66 +1,59 @@
-import React, { KeyboardEvent, useEffect, useState } from "react";
-import { HiOutlineSearch } from "react-icons/hi";
-import { SlMenu } from "react-icons/sl";
-import { VscChromeClose } from "react-icons/vsc";
-import { NavLink, useLocation } from "react-router-dom";
-// import useAuth from "../../hooks/useAuth/useAuth";
-import { ContentWrapper } from "../utility/components/contentWrapper";
-import { HeaderShow } from "./header.types";
-import useAuth from "../../hooks/useAuth/useAuth";
+import React from "react";
+import { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "./styles.scss"
 
-export const Header: React.FC = () => {
-  const [show, setShow] = useState<HeaderShow>(HeaderShow.TOP);
-  const [mobileMenu, setMobileMenu] = useState<boolean>(false);
-  const [lastScrollY, setLastScrollY] = useState<number>(0);
-  const [query, setQuery] = useState<string>("");
-  const [showSearch, setShowSearch] = useState<boolean>(false);
-  // const navigate = useNavigate();
+export const Header = () => {
+  const [show, setShow] = useState("top");
+  const [lastScrollY, setLastScrollY] = useState(0);
+  const [mobileMenu, setMobileMenu] = useState(false);
+  const [query, setQuery] = useState("");
+  const [showSearch, setShowSearch] = useState("");
+  const navigate = useNavigate();
   const location = useLocation();
-  // const [userProfile, setUserProfile] = useState({})
+  const { user, logout } = useAuth();
+  const [userProfile, setUserProfile] = useState({});
 
-  const handleNavbar = () => {
-    if (window.scrollY > 200) {
-      if (window.scrollY > lastScrollY && !mobileMenu) {
-        setShow(HeaderShow.HIDE);
-      } else {
-        setShow(HeaderShow.SHOW);
-      }
-    } else {
-      setShow(HeaderShow.TOP);
-    }
-    setLastScrollY(window.scrollY);
+  const handleSignout = () => {
+    logout().then(() => {
+      toast.success("Successfully logout!");
+    });
   };
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleNavbar);
-    return () => {
-      window.removeEventListener("scroll", handleNavbar);
-    };
-  }, [lastScrollY]);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const handleSearchQuery = (event: KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && query?.length > 0) {
-      // navigate(`/search/${query}`);
+  const controlNavbar = () => {
+    if (window.scrollY > 200) {
+      if (window.scrollY > lastScrollY && !mobileMenu) {
+        setShow("hide");
+      } else {
+        setShow("show");
+      }
+    } else {
+      setShow("top");
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
+
+  const searchQueryHandler = (event) => {
+    if (event.key === "Enter" && query.length > 0) {
+      navigate(`/search/${query}`);
       setTimeout(() => {
         setShowSearch(false);
       }, 1000);
     }
   };
 
-  const navigationHandler = (type: string) => {
-    if (type === "movie") {
-      // navigate("/explore/movie");
-    } else {
-      // navigate("/explore/tv");
-    }
-    setMobileMenu(false);
-  };
-
-  const handleSearch = () => {
+  const openSearch = () => {
     setMobileMenu(false);
     setShowSearch(true);
   };
@@ -70,11 +63,35 @@ export const Header: React.FC = () => {
     setShowSearch(false);
   };
 
+  const navigationHandler = (type) => {
+    if (type === "movie") {
+      navigate("/explore/movie");
+    } else {
+      navigate("/explore/tv");
+    }
+    setMobileMenu(false);
+  };
+
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(
+          `https://movie-app-server-eight.vercel.app/userprofile/${user?.email}`
+        )
+        .then((res) => {
+          // console.log(res.data);
+          setUserProfile(res.data);
+        });
+    }
+  }, [user]);
+
+  const [isAdmin] = useAdmin();
+  // console.log(isAdmin);
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
-        {/* <div className="logo" onClick={() => navigate("/")}> */}
-        <div className="logo">
+        <div className="logo" onClick={() => navigate("/")}>
           <h1 className="text-red-700 font-extrabold text-3xl ">FilmHoliday</h1>
         </div>
 
@@ -85,7 +102,7 @@ export const Header: React.FC = () => {
               type="text"
               placeholder="Search for a movie or tv show....."
               onChange={(e) => setQuery(e.target.value)}
-              onKeyUp={handleSearchQuery}
+              onKeyUp={searchQueryHandler}
             />
           </div>
           <li className="menuItem" onClick={() => navigationHandler("movie")}>
@@ -112,43 +129,37 @@ export const Header: React.FC = () => {
               Subscription
             </NavLink>
           </li>
-          {/* <>
-            {user && (
-              <li className="menuItem">
-                <Link
-                  to={
-                    isAdmin
-                      ? "/dashboard/adminhome"
-                      : "/dashboard/favoritevideos"
-                  }
-                >
-                  Dashboard
-                </Link>
-              </li>
-            )}
-          </> */}
-          {/* <>
-            {user && (
-              <li className="menuItem">
-                <Link to="/dashboard/userprofile">
-                  {user && (
-                    <RxAvatar
-                      alt="photo"
-                      title={userProfile?.name}
-                      src={
-                        userProfile?.photo
-                          ? userProfile?.photo
-                          : "https://cdn5.vectorstock.com/i/1000x1000/37/29/male-user-circle-icon-black-avatar-icon-user-vector-22753729.jpg"
-                      }
-                    />
-                  )}
-                </Link>
-              </li>
-            )}
-          </> */}
-          {/* <>{user ? (
+          {user && (
             <li className="menuItem">
-              <Link to={""}>
+              <Link
+                to={
+                  isAdmin ? "/dashboard/adminhome" : "/dashboard/favoritevideos"
+                }
+              >
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {user && (
+            <li className="menuItem">
+              <Link to="/dashboard/userprofile">
+                {user && (
+                  <Avatar
+                    alt="photo"
+                    title={userProfile?.name}
+                    src={
+                      userProfile?.photo
+                        ? userProfile?.photo
+                        : "https://cdn5.vectorstock.com/i/1000x1000/37/29/male-user-circle-icon-black-avatar-icon-user-vector-22753729.jpg"
+                    }
+                  />
+                )}
+              </Link>
+            </li>
+          )}
+          {user ? (
+            <li className="menuItem">
+              <Link>
                 <button
                   onClick={handleSignout}
                   className="bg-gradient-to-r from-red-600 to-red-950 hover:from-pink-500 hover:to-yellow-500 block mx-auto text-white text-sm uppercase rounded shadow-md px-6 py-2"
@@ -165,14 +176,14 @@ export const Header: React.FC = () => {
                 </button>
               </Link>
             </li>
-          )}</> */}
+          )}
           <li className="searchMenu">
-            <HiOutlineSearch onClick={handleSearch} />
+            <HiOutlineSearch onClick={openSearch} />
           </li>
         </ul>
 
         <div className="mobileMenuItems">
-          <HiOutlineSearch onClick={handleSearch} />
+          <HiOutlineSearch onClick={openSearch} />
           {mobileMenu ? (
             <VscChromeClose onClick={() => setMobileMenu(false)} />
           ) : (
@@ -188,7 +199,7 @@ export const Header: React.FC = () => {
                 type="text"
                 placeholder="Search for a movie or tv show...."
                 onChange={(e) => setQuery(e.target.value)}
-                onKeyUp={handleSearchQuery}
+                onKeyUp={searchQueryHandler}
               />
             </div>
           </ContentWrapper>
