@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ContentWrapper } from "../../../utility/components/contentWrapper/contentWrapper";
 import useFetch from "../../../../hooks/useFetch/userFetch";
-import ImageLazyLoading from "../../../components/imageLazyLoading/imageLazyLaoding";
+import ImageLazyLoading from "../../../components/imageLazyLoading/imageLazyLoading";
 
 const Banner = () => {
   const [background, setBackground] = useState("");
