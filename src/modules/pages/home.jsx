@@ -5,10 +5,10 @@ const Home = () => {
   return (
     <div>
       <Banner />
-      <Trending />
+      {/* <Trending />
       <Popular />
       <HeroBanner />
-      <TopRated />
+      <TopRated /> */}
     </div>
   );
 };

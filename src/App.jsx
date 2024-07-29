@@ -2,12 +2,9 @@ import { useEffect } from "react";
 import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { RouterProvider } from "react-router-dom";
-import router from "./routes/router";
-import {
-  getGenres,
-  getApiConfigaration,
-} from "./store/features/movieDataBase/movieDataBase";
 import { fetchDataFromApi } from "./modules/utility/api/fetchDataFromApi";
+import { getApiConfigaration, getGenres } from "./store/features/movieDataBase/movieDataBase";
+import router from "./routes/router";
 
 function App() {
   // const { url } = useSelector((state) => state?.tmdb);
@@ -20,14 +17,14 @@ function App() {
 
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
-      // console.log(res);
+      console.log(res);
 
       const url = {
         backdrop: res.images.secure_base_url + "original",
         poster: res.images.secure_base_url + "original",
         profile: res.images.secure_base_url + "original",
       };
-      // dispatch(getApiConfigaration(url));
+      dispatch(getApiConfigaration(url));
     });
   };
 
@@ -36,16 +33,15 @@ function App() {
     let endPoints = ["tv", "movie"];
     let allGenres = {};
 
-    endPoints.forEach((url) => {
+    endPoints?.forEach((url) => {
       promises.push(fetchDataFromApi(`/genre/${url}/list`));
     });
 
     const data = await Promise.all(promises);
-    // console.log(data);
+    console.log(data);
     data.map(({ genres }) => {
       return genres.map((item) => (allGenres[item.id] = item));
     });
-
     dispatch(getGenres(allGenres));
   };
 

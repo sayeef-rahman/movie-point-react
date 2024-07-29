@@ -3,12 +3,14 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ContentWrapper } from "../../../utility/components/contentWrapper/contentWrapper";
+import useFetch from "../../../../hooks/useFetch/userFetch";
+import ImageLazyLoading from "../../../components/imageLazyLoading/imageLazyLaoding";
 
 const Banner = () => {
   const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const { url } = useSelector((state) => state?.tmdb);
+  const url = useSelector((state) => state?.tmdb);
   const { data, loading } = useFetch("/movie/upcoming");
 
   useEffect(() => {
@@ -16,7 +18,7 @@ const Banner = () => {
       url?.backdrop +
       data?.results?.[Math.floor(Math.random() * 20)]?.backdrop_path;
     setBackground(bg);
-  }, [data, url.backdrop]);
+  }, [data, url?.backdrop]);
 
   const searchQueryHandler = (event) => {
     if (event.key === "Enter" && query.length > 0) {
@@ -28,7 +30,7 @@ const Banner = () => {
     <div className="heroBanner">
       {!loading && (
         <div className="backdrop-img">
-          <Img src={background} />
+          <ImageLazyLoading src={background} />
         </div>
       )}
       <div className="opacity-layer"></div>
