@@ -18,10 +18,10 @@ const router = createBrowserRouter([
       //   path: "/:mediaType/:id",
       //   element: <PrivateRoute><Details /></PrivateRoute>,
       // },
-      // {
-      //   path: "/search/:query",
-      //   element: <SearchResult />,
-      // },
+      {
+        path: "/search/:query",
+        element: <SearchResult />,
+      },
       // {
       //   path: "/explore/:mediaType",
       //   element: <Explore />,
