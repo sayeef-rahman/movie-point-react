@@ -7,6 +7,8 @@ import ImageLazyLoading from "../imageLazyLoading/imageLazyLoading";
 import CircleRating from "../circleRating/circleRating";
 import Genres from "../geners/geners";
 import moment from "moment";
+import useAuth from "../../../hooks/useAuth/useAuth";
+import PosterFallback from "../../../assets/no-poster.png"
 
 const MovieCard = ({ data, fromSearch, mediaType }) => {
   const { url } = useSelector((state) => state.tmdb);
