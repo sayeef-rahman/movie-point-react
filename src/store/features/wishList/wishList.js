@@ -5,17 +5,17 @@ export const wishListSlice = createSlice({
   initialState: null,
   reducers: {
     getWishList: (state) => {
-      return [];
+      return state;
     },
     updateWishList: (state, payload) => {
-      return [];
+      return { state, payload };
     },
     removeFromWishList: (state, payload) => {
-      return [];
+      return { state, payload };
     },
   },
 });
 
 export const { getWishList, updateWishList } = wishListSlice.actions;
 
-export default tmdbSlice.reducer;
+export default wishListSlice.reducer;

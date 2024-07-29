@@ -7,13 +7,13 @@ import "./index.scss";
 import AuthProvider from "../src/provider/authProvider/authProvider";
 import { store } from "./store/store";
 
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <AuthProvider>
-    <QueryClientProvider client={queryClient}>
-      <App />
+      <QueryClientProvider client={queryClient}>
+        <App />
       </QueryClientProvider>
     </AuthProvider>
   </Provider>

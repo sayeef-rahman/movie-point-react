@@ -38,7 +38,7 @@ const Banner = () => {
             Unlimited movies, TV shows, and more Explore now.
           </span>
           <span className="subTitle mt-8">
-          Plans now start at USD2.99/month.
+            Plans now start at USD2.99/month.
           </span>
           <div className="searchInput">
             <input
