@@ -1,13 +1,16 @@
 import { useEffect } from "react";
-import { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { RouterProvider } from "react-router-dom";
 import { fetchDataFromApi } from "./modules/utility/api/fetchDataFromApi";
-import { getApiConfigaration, getGenres } from "./store/features/movieDataBase/movieDataBase";
+import {
+  getApiConfigaration,
+  getGenres,
+} from "./store/features/movieDataBase/movieDataBase";
+import { RouterProvider } from "react-router-dom";
 import router from "./routes/router";
+import { Toaster } from "react-hot-toast";
 
 function App() {
-  // const { url } = useSelector((state) => state?.tmdb);
+  const { url } = useSelector((state) => state?.tmdb);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -17,7 +20,7 @@ function App() {
 
   const fetchApiConfig = () => {
     fetchDataFromApi("/configuration").then((res) => {
-      console.log(res);
+      // console.log(res);
 
       const url = {
         backdrop: res.images.secure_base_url + "original",
@@ -38,7 +41,6 @@ function App() {
     });
 
     const data = await Promise.all(promises);
-    console.log(data);
     data.map(({ genres }) => {
       return genres.map((item) => (allGenres[item.id] = item));
     });

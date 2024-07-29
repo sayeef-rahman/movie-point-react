@@ -10,7 +10,7 @@ const Banner = () => {
   const [background, setBackground] = useState("");
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
-  const url = useSelector((state) => state?.tmdb);
+  const { url } = useSelector((state) => state?.tmdb);
   const { data, loading } = useFetch("/movie/upcoming");
 
   useEffect(() => {

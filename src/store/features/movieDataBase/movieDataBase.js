@@ -1,11 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  url: {},
+  genres: {},
+};
+
 export const tmdbSlice = createSlice({
   name: "tmdb",
-  initialState: {
-    url: {},
-    genres: {},
-  },
+  initialState,
   reducers: {
     getApiConfigaration: (state, action) => {
       state.url = action.payload;
