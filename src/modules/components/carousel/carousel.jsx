@@ -12,6 +12,8 @@ import CircleRating from "../circleRating/circleRating";
 import Genres from "../geners/geners";
 import moment from "moment/moment";
 import "./styles.scss"
+import Swal from "sweetalert2";
+import axios from "axios";
 
 const Carousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();

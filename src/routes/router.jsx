@@ -1,9 +1,12 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/main";
-import Home from "../modules/pages/home";
-import ErrorPage from "../modules/pages/errorPage";
 import SearchResult from "../modules/components/searchResult/searchResult";
+import Details from "../modules/details/details";
+import ErrorPage from "../modules/pages/errorPage";
+import Home from "../modules/pages/home";
+import PrivateRoute from "./privateRoute";
+import Login from "../modules/login/login";
 
 const router = createBrowserRouter([
   {
@@ -15,10 +18,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <Home />,
       },
-      // {
-      //   path: "/:mediaType/:id",
-      //   element: <PrivateRoute><Details /></PrivateRoute>,
-      // },
+      {
+        path: "/:mediaType/:id",
+        element: <PrivateRoute><Details /></PrivateRoute>,
+      },
       {
         path: "/search/:query",
         element: <SearchResult />,
@@ -27,10 +30,10 @@ const router = createBrowserRouter([
       //   path: "/explore/:mediaType",
       //   element: <Explore />,
       // },
-      // {
-      //   path: "/login",
-      //   element: <Login />,
-      // },
+      {
+        path: "/login",
+        element: <Login />,
+      },
       // {
       //   path: "/signup",
       //   element: <Signup />,
