@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import "./styles.scss";
+import useAuth from "../../hooks/useAuth/useAuth";
+import axios from "axios";
+import useAdmin from "../../hooks/useAdmin/useAdmin";
+import { ContentWrapper } from "../utility/components/contentWrapper/contentWrapper";
+import { Avatar } from "@mui/material";
+import { HiOutlineSearch } from "react-icons/hi";
+import { SlMenu } from "react-icons/sl";
+import { VscChromeClose } from "react-icons/vsc";
 
 const Header = () => {
   const [show, setShow] = useState("top");

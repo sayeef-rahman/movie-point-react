@@ -6,7 +6,7 @@ import Footer from "../modules/footer/footer";
 const Main = () => {
   return (
     <div>
-      {/* <Header /> */}
+      <Header />
       <Outlet />
       <Footer />
     </div>
