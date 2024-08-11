@@ -49,39 +49,40 @@ const Carousel = ({ data, loading, endpoint, title }) => {
   };
 
   const handleNavigate = (item) => {
-    if (!user && !user?.email) {
-      Swal.fire({
-        title: "Please Login to watch movie",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Sign In",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/login");
-        }
-      });
-    } else if (
-      currUser &&
-      currUser?.subscriptionStatus !== "paid" &&
-      currUser?.role !== "admin"
-    ) {
-      Swal.fire({
-        title: "Please get a subscription and watch your favorite movie",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Subscription",
-      }).then((result) => {
-        if (result.isConfirmed) {
-          navigate("/subscription");
-        }
-      });
-    } else {
-      navigate(`/${item.media_type || endpoint}/${item.id}`);
-    }
+    navigate(`/${item.media_type || endpoint}/${item.id}`);
+    // if (!user && !user?.email) {
+    //   Swal.fire({
+    //     title: "Please Login to watch movie",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Sign In",
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       navigate("/login");
+    //     }
+    //   });
+    // } else if (
+    //   currUser &&
+    //   currUser?.subscriptionStatus !== "paid" &&
+    //   currUser?.role !== "admin"
+    // ) {
+    //   Swal.fire({
+    //     title: "Please get a subscription and watch your favorite movie",
+    //     icon: "warning",
+    //     showCancelButton: true,
+    //     confirmButtonColor: "#3085d6",
+    //     cancelButtonColor: "#d33",
+    //     confirmButtonText: "Subscription",
+    //   }).then((result) => {
+    //     if (result.isConfirmed) {
+    //       navigate("/subscription");
+    //     }
+    //   });
+    // } else {
+    //   navigate(`/${item.media_type || endpoint}/${item.id}`);
+    // }
   };
 
   const skItem = () => {

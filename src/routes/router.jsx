@@ -38,15 +38,6 @@ const router = createBrowserRouter([
       //   path: "/signup",
       //   element: <Signup />,
       // },
-      // {
-      //   path: "/subscription",
-      //   element: <Subscription />,
-      // }, 
-      // {
-      //   path: 'payment/:id',
-      //   element: <Payment />,
-      //   loader: ({params})=> fetch(`https://movie-app-server-eight.vercel.app/subscription/${params.id}`)
-      // },
     ],
   },
   // {
