@@ -3,6 +3,9 @@ import { useParams } from "react-router-dom";
 import DetailsBanner from "./DetailsBanner/DetailsBanner";
 import useFetch from "../../hooks/useFetch/userFetch";
 import Cast from "./cast/cast";
+import VideosSection from "./videosSection/videosSection";
+import Similar from "../components/similar/similar";
+import Recommendations from "../components/recommendations/recommendations";
 
 const Details = () => {
   const { mediaType, id } = useParams();
