@@ -2,12 +2,11 @@ import React from "react";
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/main";
 import SearchResult from "../modules/components/searchResult/searchResult";
-import Details from "../modules/details/details";
-import ErrorPage from "../modules/pages/errorPage";
-import Home from "../modules/pages/home";
-import PrivateRoute from "./privateRoute";
+import Explore from "../modules/explore/explore";
 import Login from "../modules/login/login";
-import Explore from "../pages/explore/explore";
+import DetailsPage from "../pages/detailsPage";
+import ErrorPage from "../pages/errorPage";
+import HomePage from "../pages/homePage";
 
 const router = createBrowserRouter([
   {
@@ -17,11 +16,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />,
+        element: <HomePage />,
       },
       {
         path: "/:mediaType/:id",
-        element: <PrivateRoute><Details /></PrivateRoute>,
+        element: <DetailsPage />,
       },
       {
         path: "/search/:query",

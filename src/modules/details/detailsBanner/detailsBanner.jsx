@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import PosterFallback from "../../../assets/no-poster.png";
+import PosterFallback from "../../../assets/fallbacks-image-man.jpg";
 import "./styles.scss";
 import axios from "axios";
 import moment from "moment";
@@ -10,12 +10,11 @@ import { FaHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import useFetch from "../../../hooks/useFetch/userFetch";
-// import CircleRating from "../../../components/CircleRating/CircleRating";
-// import ContentWrapper from "../../../components/ContentWrapper/ContentWrapper";
-// import Genres from "../../../components/Genres/Genres";
-// import VideoPopup from "../../../components/VideoPopup/VideoPopup";
-// import useAuth from "../../../hooks/useAuth";
-// import useFetch from "../../../hooks/useFetch";
+import { ContentWrapper } from "../../utility/components/contentWrapper/contentWrapper";
+import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading";
+import Genres from "../../components/geners/geners";
+import CircleRating from "../../components/circleRating/circleRating";
+import VideoPopup from "../../components/videoPopup/videoPopup";
 
 const DetailsBanner = ({ video, crew }) => {
   const [show, setShow] = useState(false);
@@ -24,7 +23,6 @@ const DetailsBanner = ({ video, crew }) => {
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.tmdb);
   const { user } = useAuth();
-  // console.log(data);
 
   const handleFavorite = (favorite) => {
     const {
@@ -116,19 +114,22 @@ const DetailsBanner = ({ video, crew }) => {
           {!!data && (
             <React.Fragment>
               <div className="backdrop-img">
-                <Img src={url.backdrop + data?.backdrop_path} />
+                <ImageLazyLoading src={url.backdrop + data?.backdrop_path} />
               </div>
               <div className="opacity-layer"></div>
               <ContentWrapper>
                 <div className="content">
                   <div className="left">
                     {data.poster_path ? (
-                      <Img
+                      <ImageLazyLoading
                         className="posterImg"
                         src={url.backdrop + data?.poster_path}
                       />
                     ) : (
-                      <Img className="posterImg" src={PosterFallback} />
+                      <ImageLazyLoading
+                        className="posterImg"
+                        src={PosterFallback}
+                      />
                     )}
                   </div>
                   <div className="right">
@@ -150,7 +151,39 @@ const DetailsBanner = ({ video, crew }) => {
                           setVideoId(video.key);
                         }}
                       >
-                        <PlayIcon />
+                        <svg
+                          version="1.1"
+                          xmlns="http://www.w3.org/2000/svg"
+                          xmlnsXlink="http://www.w3.org/1999/xlink"
+                          x="0px"
+                          y="0px"
+                          width="80px"
+                          height="80px"
+                          viewBox="0 0 213.7 213.7"
+                          enableBackground="new 0 0 213.7 213.7"
+                          xmlSpace="preserve"
+                        >
+                          <polygon
+                            className="triangle"
+                            fill="none"
+                            strokeWidth="7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeMiterlimit="10"
+                            points="73.5,62.5 148.5,105.8 73.5,149.1 "
+                          ></polygon>
+                          <circle
+                            className="circle"
+                            fill="none"
+                            strokeWidth="7"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeMiterlimit="10"
+                            cx="106.8"
+                            cy="106.8"
+                            r="103.3"
+                          ></circle>
+                        </svg>
                         <span className="text">Watch Trailer</span>
                       </div>
                       <button

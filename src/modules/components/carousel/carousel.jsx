@@ -14,6 +14,7 @@ import moment from "moment/moment";
 import "./styles.scss"
 import Swal from "sweetalert2";
 import axios from "axios";
+import PosterFallback from "../../../assets/fallbacks-image-man.jpg";
 
 const Carousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();

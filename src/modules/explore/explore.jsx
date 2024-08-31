@@ -3,12 +3,12 @@ import { sortbyData } from "./data";
 import "./styles.scss";
 import { useParams } from "react-router-dom";
 import useFetch from "../../hooks/useFetch/userFetch";
-import { fetchDataFromApi } from "../../modules/utility/api/fetchDataFromApi";
-import { ContentWrapper } from "../../modules/utility/components/contentWrapper/contentWrapper";
+import { fetchDataFromApi } from "../utility/api/fetchDataFromApi";
+import { ContentWrapper } from "../utility/components/contentWrapper/contentWrapper";
 import Select from "react-select";
-import Spinner from "../../modules/components/spinner/spinner";
+import Spinner from "../components/spinner/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
-import MovieCard from "../../modules/components/movieCard/movieCard";
+import MovieCard from "../components/movieCard/movieCard";
 
 let filters = {};
 
