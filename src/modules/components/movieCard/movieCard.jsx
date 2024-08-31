@@ -9,6 +9,7 @@ import Genres from "../geners/geners";
 import moment from "moment";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import PosterFallback from "../../../assets/no-poster.png"
+import axios from "axios";
 
 const MovieCard = ({ data, fromSearch, mediaType }) => {
   const { url } = useSelector((state) => state.tmdb);

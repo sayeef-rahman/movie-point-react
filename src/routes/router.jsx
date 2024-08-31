@@ -7,6 +7,7 @@ import ErrorPage from "../modules/pages/errorPage";
 import Home from "../modules/pages/home";
 import PrivateRoute from "./privateRoute";
 import Login from "../modules/login/login";
+import Explore from "../pages/explore/explore";
 
 const router = createBrowserRouter([
   {
@@ -26,10 +27,10 @@ const router = createBrowserRouter([
         path: "/search/:query",
         element: <SearchResult />,
       },
-      // {
-      //   path: "/explore/:mediaType",
-      //   element: <Explore />,
-      // },
+      {
+        path: "/explore/:mediaType",
+        element: <Explore />,
+      },
       {
         path: "/login",
         element: <Login />,
