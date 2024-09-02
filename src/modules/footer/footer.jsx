@@ -53,8 +53,7 @@ const Footer = () => {
         </ul>
       </ContentWrapper>
       <p className="text-center border-t pt-6 lg:mx-64 mx-8 text-sm lg:mb-0 mb-4">
-        ©{new Date().getFullYear()} Copyright All right reserved by FilmHoliday
-        LTD -- @Ashraf
+        ©{new Date().getFullYear()} Copyright All right reserved by <a href="">@Sayeef Rahman</a>
       </p>
     </footer>
   );

@@ -35,45 +35,15 @@ const router = createBrowserRouter([
         element: <Login />,
       },
       // {
-      //   path: "/signup",
-      //   element: <Signup />,
+      //   path: "/favorite-videos",
+      //   element: <FavoriteVideos />,
+      // },
+      // {
+      //   path: "watch-later",
+      //   element: <WatchLater />,
       // },
     ],
   },
-  // {
-  //   path: "/dashboard",
-  //   element: <PrivateRoute><Dashboard /></PrivateRoute>,
-  //   children: [
-  //     // User Dashboard
-  //     {
-  //       path: 'favoritevideos',
-  //       element: <FavoriteVideos />
-  //     },
-  //     {
-  //       path: 'watchlater',
-  //       element: <WatchLater />
-  //     },
-  //     // Admin Dashboard
-  //     {
-  //       path: 'adminhome',
-  //       element: <AdminRoute><AdminHome /></AdminRoute>
-  //     },
-  //     {
-  //       path: 'manageusers',
-  //       element: <AdminRoute><ManageUsers /></AdminRoute>
-  //     },
-  //     {
-  //       path: 'userprofile',
-  //       element: <UserProfile />
-  //     },
-  //     // update profile
-  //     {
-  //       path: 'updateProfile/:id',
-  //       element: <UserProfileUpdate />,
-  //       loader: ({params})=> fetch(`https://movie-app-server-eight.vercel.app/getprofileinfo/${params.id}`)
-  //     },
-  //   ]
-  // },
 ]);
 
 export default router;

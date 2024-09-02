@@ -46,26 +46,8 @@ const MovieCard = ({ data, fromSearch, mediaType }) => {
         }
       });
     }
-    // else if (
-    //   currUser &&
-    //   currUser?.subscriptionStatus !== "paid" &&
-    //   currUser?.role !== "admin"
-    // ) {
-    //   Swal.fire({
-    //     title: "Please get a subscription and watch your favorite movie",
-    //     icon: "warning",
-    //     showCancelButton: true,
-    //     confirmButtonColor: "#3085d6",
-    //     cancelButtonColor: "#d33",
-    //     confirmButtonText: "Subscription",
-    //   }).then((result) => {
-    //     if (result.isConfirmed) {
-    //       navigate("/subscription");
-    //     }
-    //   });
-    // }
     else {
-      navigate(`/${data.media_type || mediaType}/${data.id}`);
+      navigate(`/${data?.media_type || mediaType}/${data.id}`);
     }
   };
 
