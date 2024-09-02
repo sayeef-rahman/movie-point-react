@@ -6,7 +6,6 @@ import useAuth from "../../hooks/useAuth/useAuth";
 import axios from "axios";
 import useAdmin from "../../hooks/useAdmin/useAdmin";
 import { ContentWrapper } from "../utility/components/contentWrapper/contentWrapper";
-import { Avatar } from "@mui/material";
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
@@ -20,7 +19,6 @@ const Header = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { user, logout } = useAuth();
-  const [userProfile, setUserProfile] = useState({});
 
   const handleSignout = () => {
     logout().then(() => {
@@ -80,27 +78,13 @@ const Header = () => {
     setMobileMenu(false);
   };
 
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://movie-app-server-eight.vercel.app/userprofile/${user?.email}`
-        )
-        .then((res) => {
-          // console.log(res.data);
-          setUserProfile(res.data);
-        });
-    }
-  }, [user]);
-
   const [isAdmin] = useAdmin();
-  // console.log(isAdmin);
 
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
         <div className="logo" onClick={() => navigate("/")}>
-          <h1 className="text-red-700 font-extrabold text-3xl ">FilmHoliday</h1>
+          <h1 className="text-red-700 font-extrabold text-3xl ">Movie Point</h1>
         </div>
 
         <ul className="menuItems">
@@ -148,7 +132,7 @@ const Header = () => {
               </Link>
             </li>
           )}
-          {user && (
+          {/* {user && (
             <li className="menuItem">
               <Link to="/dashboard/userprofile">
                 {user && (
@@ -164,7 +148,7 @@ const Header = () => {
                 )}
               </Link>
             </li>
-          )}
+          )} */}
           {user ? (
             <li className="menuItem">
               <Link>

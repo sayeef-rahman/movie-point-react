@@ -7,7 +7,7 @@ import useFetch from "../../../../hooks/useFetch/userFetch";
 import ImageLazyLoading from "../../../components/imageLazyLoading/imageLazyLoading";
 
 const Banner = () => {
-  const [background, setBackground] = useState("");
+  const [background, setBackground] = useState(null);
   const [query, setQuery] = useState("");
   const navigate = useNavigate();
   const { url } = useSelector((state) => state?.tmdb);
@@ -28,9 +28,9 @@ const Banner = () => {
 
   return (
     <div className="heroBanner">
-      {!loading && (
+      {!loading && background && (
         <div className="backdrop-img">
-          <ImageLazyLoading src={background} />
+          <ImageLazyLoading src={background ?? ""} />
         </div>
       )}
       <div className="opacity-layer"></div>
