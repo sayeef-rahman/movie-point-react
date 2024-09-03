@@ -46,6 +46,7 @@
       align-items: center;
       margin: 0 13px;
       color: white;
+      font-size: 14px;
       font-weight: 500;
       position: relative;
       &.searchIcon {
@@ -92,7 +93,7 @@
       border-top: 1px solid rgba(255, 255, 255, 0.1);
       animation: mobileMenu 0.3s ease forwards;
       .menuItem {
-        font-size: 20px;
+        font-size: 14px;
         width: 100%;
         height: auto;
         padding: 15px 20px;

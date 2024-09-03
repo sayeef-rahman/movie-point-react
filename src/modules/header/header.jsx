@@ -9,6 +9,7 @@ import { ContentWrapper } from "../utility/components/contentWrapper/contentWrap
 import { HiOutlineSearch } from "react-icons/hi";
 import { SlMenu } from "react-icons/sl";
 import { VscChromeClose } from "react-icons/vsc";
+import { LinkList } from "./date";
 
 const Header = () => {
   const [show, setShow] = useState("top");
@@ -97,58 +98,23 @@ const Header = () => {
               onKeyUp={searchQueryHandler}
             />
           </div>
-          <li className="menuItem" onClick={() => navigationHandler("movie")}>
-            <NavLink
-              to="/explore/movie"
-              className={({ isActive }) => (isActive ? "text-red-600" : "")}
-            >
-              Movies
-            </NavLink>
-          </li>
-          <li className="menuItem" onClick={() => navigationHandler("tv")}>
-            <NavLink
-              to="/explore/tv"
-              className={({ isActive }) => (isActive ? "text-red-600" : "")}
-            >
-              TV Shows
-            </NavLink>
-          </li>
-          <li className="menuItem">
-            <NavLink
-              to="/subscription"
-              className={({ isActive }) => (isActive ? "text-red-600" : "")}
-            >
-              Subscription
-            </NavLink>
-          </li>
-          {user && (
-            <li className="menuItem">
-              <Link
-                to={
-                  isAdmin ? "/dashboard/adminhome" : "/dashboard/favoritevideos"
-                }
+          {LinkList?.map((link) => {
+            return (
+              <li
+                key={link?.value}
+                className="menuItem"
+                onClick={() => navigationHandler(link?.value)}
               >
-                Dashboard
-              </Link>
-            </li>
-          )}
-          {/* {user && (
-            <li className="menuItem">
-              <Link to="/dashboard/userprofile">
-                {user && (
-                  <Avatar
-                    alt="photo"
-                    title={userProfile?.name}
-                    src={
-                      userProfile?.photo
-                        ? userProfile?.photo
-                        : "https://cdn5.vectorstock.com/i/1000x1000/37/29/male-user-circle-icon-black-avatar-icon-user-vector-22753729.jpg"
-                    }
-                  />
-                )}
-              </Link>
-            </li>
-          )} */}
+                <NavLink
+                  to={link?.redirect}
+                  className={({ isActive }) => (isActive ? "text-red-600" : "")}
+                >
+                  {link?.label}
+                </NavLink>
+              </li>
+            );
+          })}
+          
           {user ? (
             <li className="menuItem">
               <Link>
