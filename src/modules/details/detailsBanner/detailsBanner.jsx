@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
-import PosterFallback from "../../../assets/fallbacks-image-man.jpg";
+import PosterFallback from "../../../assets/no-poster.png";
 import "./styles.scss";
 import axios from "axios";
 import moment from "moment";

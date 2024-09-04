@@ -30,11 +30,11 @@ const Banner = () => {
     <div className="heroBanner">
       {!loading && background && (
         <div className="backdrop-img">
-          <img src={background ?? ""} alt="" className="h-dvh" />
+          <img src={background ?? ""} alt="" className="h-dvh object-cover" />
           {/* <ImageLazyLoading src={background ?? ""} /> */}
         </div>
       )}
-      <div className="opacity-layer"></div>
+      {/* <div className="opacity-layer"></div> */}
       <ContentWrapper>
         <div className="heroBannerContent">
           <span className=" title">
