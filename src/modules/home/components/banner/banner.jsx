@@ -30,7 +30,7 @@ const Banner = () => {
     <div className="heroBanner">
       {!loading && background && (
         <div className="backdrop-img">
-          <img src={background ?? ""} alt="" className="h-dvh object-cover" />
+          <img src={background ?? ""} alt="" className="" />
           {/* <ImageLazyLoading src={background ?? ""} /> */}
         </div>
       )}
