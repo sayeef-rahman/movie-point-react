@@ -2,6 +2,9 @@
   background-color: var(--black);
   border-radius: 50%;
   padding: 2px;
+  position: absolute;
+  top: 0;
+  right: 0;
   .CircularProgressbar-text {
     font-size: 34px;
     font-weight: 700;

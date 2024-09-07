@@ -11,29 +11,17 @@ import ImageLazyLoading from "../imageLazyLoading/imageLazyLoading";
 import CircleRating from "../circleRating/circleRating";
 import Genres from "../geners/geners";
 import moment from "moment/moment";
-import "./styles.scss"
+import "./styles.scss";
 import Swal from "sweetalert2";
 import axios from "axios";
 import PosterFallback from "../../../assets/fallbacks-image-man.jpg";
+import PosterCard from "../posterCard/posterCard";
 
 const Carousel = ({ data, loading, endpoint, title }) => {
   const carouselContainer = useRef();
   const { url } = useSelector((state) => state.tmdb);
   const navigate = useNavigate();
-  const { user } = useAuth();
-  const [currUser, setCurrUser] = useState({});
-
-  useEffect(() => {
-    if (user) {
-      axios
-        .get(
-          `https://movie-app-server-eight.vercel.app/userprofile/${user?.email}`
-        )
-        .then((res) => {
-          setCurrUser(res.data);
-        });
-    }
-  }, [user]);
+  const { genres } = useSelector((state) => state.tmdb);
 
   const navigation = (dir) => {
     const container = carouselContainer.current;
@@ -116,27 +104,7 @@ const Carousel = ({ data, loading, endpoint, title }) => {
               const posterUrl = item.poster_path
                 ? url.poster + item.poster_path
                 : PosterFallback;
-              return (
-                <div
-                  key={item.id}
-                  className="carouselItem"
-                  onClick={() => handleNavigate(item)}
-                >
-                  <div className="posterBlock">
-                    <ImageLazyLoading src={posterUrl} />
-                    <CircleRating rating={item.vote_average.toFixed(1)} />
-                    <Genres data={item.genre_ids.slice(0, 2)} />
-                  </div>
-                  <div className="textBlock">
-                    <span className="title">{item.title || item.name}</span>
-                    <span className="date">
-                      {moment(item.release_date || item.first_air_date).format(
-                        "MMM D, YYYY"
-                      )}
-                    </span>
-                  </div>
-                </div>
-              );
+              return <PosterCard key={item?.id} item={item} genres={genres} handleNavigate={handleNavigate} posterUrl={posterUrl} />;
             })}
           </div>
         ) : (

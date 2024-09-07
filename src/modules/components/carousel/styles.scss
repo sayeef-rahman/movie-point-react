@@ -59,7 +59,7 @@
         border-radius: 12px;
         width: 100%;
         aspect-ratio: 1 / 1.5;
-        margin-bottom: 30px;
+        margin-bottom: 10px;
       }
       .textBlock {
         display: flex;
@@ -160,15 +160,19 @@
           font-size: 16px;
           margin-bottom: 10px;
           line-height: 24px;
-          @include ellipsis(1);
-          @include md {
-            font-size: 20px;
-          }
+          // @include ellipsis(1);
         }
         .date {
           font-size: 14px;
           opacity: 0.5;
         }
+      }
+      .generTag{
+        padding: 8px;
+        font-size: 12px;
+        border-radius: 8px;
+        margin: 4px;
+        background-color: #bb0101;
       }
     }
   }
