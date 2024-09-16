@@ -1,6 +1,7 @@
 import React from "react";
 import {
   FaFacebookF,
+  FaGithub,
   FaInstagram,
   FaLinkedin,
   FaTwitter,
@@ -14,22 +15,27 @@ const Footer = () => {
     <footer className="footer">
       <ContentWrapper>
         <div className="socialIcons">
-          <Link to={"https://www.facebook.com/ashraf.mahmud.444"}>
+          <Link to={"https://github.com/sayeef-rahman"}>
+            <span className="icon">
+            <FaGithub />
+            </span>
+          </Link>
+          <Link to={"https://www.facebook.com/sayeefrahmaan"}>
             <span className="icon">
               <FaFacebookF />
             </span>
           </Link>
-          <Link to={"https://www.instagram.com/_ashraf_mahmud_/"}>
+          <Link to={"https://www.instagram.com/sayeef_rahman/"}>
             <span className="icon">
               <FaInstagram />
             </span>
           </Link>
-          <Link to={"https://www.twitter.com/"}>
+          <Link to={"https://x.com/sayeef_rahmaan"}>
             <span className="icon">
               <FaTwitter />
             </span>
           </Link>
-          <Link to={"https://www.linkedin.com/in/ashraful-islam-04804a283/"}>
+          <Link to={"https://www.linkedin.com/in/sayeef-rahman/"}>
             <span className="icon">
               <FaLinkedin />
             </span>
@@ -53,7 +59,7 @@ const Footer = () => {
         </ul>
       </ContentWrapper>
       <p className="text-center border-t pt-6 lg:mx-64 mx-8 text-sm lg:mb-0 mb-4">
-        ©{new Date().getFullYear()} Copyright All right reserved by <a href="">@Sayeef Rahman</a>
+        ©{new Date().getFullYear()} Copyright All right reserved by <a href="https://www.linkedin.com/in/sayeef-rahman/" target="_blank">@Sayeef Rahman</a>
       </p>
     </footer>
   );
