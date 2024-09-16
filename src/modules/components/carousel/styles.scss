@@ -160,19 +160,26 @@
           font-size: 16px;
           margin-bottom: 10px;
           line-height: 24px;
-          // @include ellipsis(1);
+          line-height: 24px;
+          @include ellipsis(1);
+          @include md {
+            font-size: 20px;
+          }
         }
         .date {
           font-size: 14px;
           opacity: 0.5;
         }
       }
-      .generTag{
+      .generTag {
         padding: 8px;
         font-size: 12px;
         border-radius: 8px;
         margin: 4px;
         background-color: #bb0101;
+      }
+      .allGeners {
+        display: flex;
       }
     }
   }

@@ -16,7 +16,7 @@ const PosterCard = ({ item, genres, handleNavigate, posterUrl }) => {
       </div>
       <div className="textBlock">
         <span className="title">{item.title || item.name}</span>
-        <div className="">
+        <div className="allGeners">
           {item?.genre_ids?.slice(0, 2)?.map((g) => {
             if (!genres[g]?.name) return;
             return (
