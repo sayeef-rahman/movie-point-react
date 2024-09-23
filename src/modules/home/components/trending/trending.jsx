@@ -8,7 +8,7 @@ import { ContentWrapper } from "../../../utility/components/contentWrapper/conte
 const Trending = () => {
   const [endpoint, setEndpoint] = useState("day");
 
-  const { data, loading } = useFetch(`/trending/all/${endpoint}`);
+  const { data, loading, isSuccess, error } = useFetch(`/trending/all/${endpoint}`);
 
   const onTabChange = (tab) => {
     setEndpoint(tab === "Day" ? "day" : "week");
