@@ -82,7 +82,7 @@
     overflow-y: hidden;
     margin-right: -20px;
     margin-left: -20px;
-    padding: 0 20px;
+    padding: 0 16px;
     @include md {
       gap: 20px;
       overflow-y: hidden;
@@ -93,6 +93,7 @@
     .carouselItem {
       width: calc(60%);
       cursor: pointer;
+      padding: 8px;
       @include md {
         width: calc(25% - 15px);
       }
@@ -106,11 +107,10 @@
         aspect-ratio: 1 / 1.5;
         background-size: cover;
         background-position: center;
-        margin-bottom: 30px;
+        margin-bottom: 16px;
         display: flex;
         align-items: flex-end;
         justify-content: space-between;
-        padding: 10px;
         transition: transform 0.4s ease;
         .lazy-load-image-background {
           position: absolute;
@@ -127,9 +127,9 @@
             object-position: center;
           }
         }
-        &:hover {
-          transform: scale(1.1);
-        }
+        // &:hover {
+        //   transform: scale(1.1);
+        // }
         .circleRating {
           width: 40px;
           height: 40px;
@@ -169,6 +169,16 @@
         .date {
           font-size: 14px;
           opacity: 0.5;
+        }
+        .starRating {
+          margin-bottom: 8px;
+          span {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            font-size: 16px;
+            color: rgba(182, 178, 178, 0.904);
+          }
         }
       }
       .generTag {
