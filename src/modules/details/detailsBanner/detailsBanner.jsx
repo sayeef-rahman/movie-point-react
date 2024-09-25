@@ -6,7 +6,7 @@ import axios from "axios";
 import moment from "moment";
 import { toast } from "react-hot-toast";
 import { BiListPlus } from "react-icons/bi";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import useAuth from "../../../hooks/useAuth/useAuth";
 import useFetch from "../../../hooks/useFetch/userFetch";
@@ -15,6 +15,7 @@ import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading
 import Genres from "../../components/geners/geners";
 import CircleRating from "../../components/circleRating/circleRating";
 import VideoPopup from "../../components/videoPopup/videoPopup";
+import { FaRegCirclePlay } from "react-icons/fa6";
 
 const DetailsBanner = ({ video, crew }) => {
   const [show, setShow] = useState(false);
@@ -145,56 +146,29 @@ const DetailsBanner = ({ video, crew }) => {
                     <div className="row">
                       <CircleRating rating={data.vote_average.toFixed(1)} />
                       <div
-                        className="playbtn"
+                        className="playBtn"
                         onClick={() => {
                           setShow(true);
                           setVideoId(video.key);
                         }}
                       >
-                        <svg
-                          version="1.1"
-                          xmlns="http://www.w3.org/2000/svg"
-                          xmlnsXlink="http://www.w3.org/1999/xlink"
-                          x="0px"
-                          y="0px"
-                          width="80px"
-                          height="80px"
-                          viewBox="0 0 213.7 213.7"
-                          enableBackground="new 0 0 213.7 213.7"
-                          xmlSpace="preserve"
-                        >
-                          <polygon
-                            className="triangle"
-                            fill="none"
-                            strokeWidth="7"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeMiterlimit="10"
-                            points="73.5,62.5 148.5,105.8 73.5,149.1 "
-                          ></polygon>
-                          <circle
-                            className="circle"
-                            fill="none"
-                            strokeWidth="7"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeMiterlimit="10"
-                            cx="106.8"
-                            cy="106.8"
-                            r="103.3"
-                          ></circle>
-                        </svg>
+                        <FaRegCirclePlay size={20} />
                         <span className="text">Watch Trailer</span>
                       </div>
-                      <button
+                      {/* <button
                         onClick={() => handleFavorite(data)}
                         title="favorite"
                       >
                         <FaHeart className="text-2xl text-red-800" />
-                      </button>
-                      <button onClick={() => handleSave(data)} title="Save">
+                      </button> */}
+                      {/* <button onClick={() => handleSave(data)} title="Save">
                         <BiListPlus className="text-3xl text-purple-600 bg-slate-200 rounded-sm" />
-                      </button>
+                      </button> */}
+
+                      <div className="ratingSection">
+                        <FaStar size={16} />
+                        <span className="text">Watch Trailer</span>
+                      </div>
                     </div>
 
                     <div className="overview">
