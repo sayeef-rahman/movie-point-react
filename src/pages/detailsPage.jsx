@@ -17,10 +17,10 @@ const DetailsPage = () => {
   return (
     <div>
       <DetailsBanner video={data?.results[0]} crew={credits?.crew} />
-      <Cast data={credits?.cast} loading={creditsLoading} />
+      {credits?.cast && <Cast data={credits?.cast} loading={creditsLoading} />}
       <VideosSection data={data} loading={loading} />
-      <Similar mediaType={mediaType} id={id} />
-      <Recommendations mediaType={mediaType} id={id} />
+      {/* <Similar mediaType={mediaType} id={id} />
+      <Recommendations mediaType={mediaType} id={id} /> */}
     </div>
   );
 };

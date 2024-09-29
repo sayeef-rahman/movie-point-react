@@ -26,76 +26,10 @@ const DetailsBanner = ({ video, crew }) => {
   const { user } = useAuth();
 
   const handleFavorite = (favorite) => {
-    const {
-      adult,
-      title,
-      name,
-      backdrop_path,
-      first_air_date,
-      id,
-      poster_path,
-      vote_average,
-    } = favorite;
-
-    axios
-      .post(`https://movie-app-server-eight.vercel.app/favorite`, {
-        email: user?.email,
-        adult,
-        title,
-        name,
-        backdrop_path: backdrop_path,
-        first_air_date,
-        id,
-        poster_path: poster_path,
-        vote_average,
-      })
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data.insertedId) {
-          toast.success("added to favorite");
-        } else {
-          toast.error("This movie already added to your favorite collection");
-        }
-      });
+    console.log(favorite);
   };
 
-  const handleSave = (saveMovie) => {
-    const {
-      adult,
-      title,
-      name,
-      backdrop_path,
-      first_air_date,
-      id,
-      poster_path,
-      vote_average,
-    } = saveMovie;
-
-    axios
-      .post(`https://movie-app-server-eight.vercel.app/save`, {
-        email: user?.email,
-        adult,
-        title,
-        name,
-        backdrop_path: backdrop_path,
-        first_air_date,
-        id,
-        poster_path: poster_path,
-        vote_average,
-      })
-      .then((res) => {
-        // console.log(res.data);
-        if (res.data.insertedId) {
-          toast.success("added to watch later");
-        } else {
-          toast.error(
-            "This movie already added to your watch later collection"
-          );
-        }
-      });
-  };
-
-  const _genres = data?.genres?.map((g) => g.id);
+  const genres = data?.genres?.map((g) => g.id);
 
   const director = crew?.filter((f) => f.job === "Director");
   const writer = crew?.filter(
@@ -117,11 +51,11 @@ const DetailsBanner = ({ video, crew }) => {
               <div className="backdrop-img">
                 <ImageLazyLoading src={url.backdrop + data?.backdrop_path} />
               </div>
-              <div className="opacity-layer"></div>
+              {/* <div className="opacity-layer"></div> */}
               <ContentWrapper>
                 <div className="content">
                   <div className="left">
-                    {data.poster_path ? (
+                    {data?.poster_path ? (
                       <ImageLazyLoading
                         className="posterImg"
                         src={url.backdrop + data?.poster_path}
@@ -139,63 +73,60 @@ const DetailsBanner = ({ video, crew }) => {
                         data?.release_date
                       ).format("YYYY")})`}
                     </div>
-                    <div className="subtitle">{data.tagline}</div>
+                    <div className="subtitle">{data?.tagline}</div>
 
-                    <Genres data={_genres} />
+                    <Genres data={genres} />
 
                     <div className="row">
-                      <CircleRating rating={data.vote_average.toFixed(1)} />
                       <div
                         className="playBtn"
                         onClick={() => {
                           setShow(true);
-                          setVideoId(video.key);
+                          setVideoId(video?.key);
                         }}
                       >
                         <FaRegCirclePlay size={20} />
                         <span className="text">Watch Trailer</span>
                       </div>
-                      {/* <button
+                      <div className="playBtn">
+                        <FaStar size={16} />
+                        <span className="text">
+                          {data?.vote_average?.toFixed(1)}
+                        </span>
+                      </div>
+                      <button
                         onClick={() => handleFavorite(data)}
                         title="favorite"
                       >
                         <FaHeart className="text-2xl text-red-800" />
-                      </button> */}
-                      {/* <button onClick={() => handleSave(data)} title="Save">
-                        <BiListPlus className="text-3xl text-purple-600 bg-slate-200 rounded-sm" />
-                      </button> */}
-
-                      <div className="ratingSection">
-                        <FaStar size={16} />
-                        <span className="text">Watch Trailer</span>
-                      </div>
+                      </button>
                     </div>
 
                     <div className="overview">
                       <div className="heading">Overview</div>
-                      <div className="description">{data.overview}</div>
+                      <div className="description">{data?.overview}</div>
                     </div>
 
                     <div className="info">
-                      {data.status && (
+                      {data?.status && (
                         <div className="infoItem">
                           <span className="text bold">Status: </span>
-                          <span className="text">{data.status}</span>
+                          <span className="text">{data?.status}</span>
                         </div>
                       )}
-                      {data.release_date && (
+                      {data?.release_date && (
                         <div className="infoItem">
                           <span className="text bold">Release Date: </span>
                           <span className="text">
-                            {moment(data.release_date).format("MMM D, YYYY")}
+                            {moment(data?.release_date).format("MMM D, YYYY")}
                           </span>
                         </div>
                       )}
-                      {data.runtime && (
+                      {data?.runtime && (
                         <div className="infoItem">
                           <span className="text bold">Runtime: </span>
                           <span className="text">
-                            {toHoursAndMinutes(data.runtime)}
+                            {toHoursAndMinutes(data?.runtime)}
                           </span>
                         </div>
                       )}
