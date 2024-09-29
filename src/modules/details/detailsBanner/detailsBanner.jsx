@@ -29,6 +29,10 @@ const DetailsBanner = ({ video, crew }) => {
     console.log(favorite);
   };
 
+  const handleSave = (favorite) => {
+    console.log(favorite);
+  };
+
   const genres = data?.genres?.map((g) => g.id);
 
   const director = crew?.filter((f) => f.job === "Director");
@@ -99,6 +103,9 @@ const DetailsBanner = ({ video, crew }) => {
                         title="favorite"
                       >
                         <FaHeart className="text-2xl text-red-800" />
+                      </button>
+                      <button onClick={() => handleSave(data)} title="Save">
+                        <BiListPlus className="text-3xl text-purple-600 bg-slate-200 rounded-sm" />
                       </button>
                     </div>
 

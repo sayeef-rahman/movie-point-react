@@ -129,9 +129,9 @@
             object-position: center;
           }
         }
-        // &:hover {
-        //   transform: scale(1.1);
-        // }
+        &:hover {
+          transform: scale(1.1);
+        }
         .circleRating {
           width: 40px;
           height: 40px;
