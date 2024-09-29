@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { ContentWrapper } from "../../utility/components/contentWrapper/contentWrapper";
 import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading";
 import VideoPopup from "../../components/videoPopup/videoPopup";
+import "./style.scss"
 
 const VideosSection = ({ data, loading }) => {
   const [show, setShow] = useState(false);

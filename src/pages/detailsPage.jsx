@@ -19,8 +19,8 @@ const DetailsPage = () => {
       <DetailsBanner video={data?.results[0]} crew={credits?.crew} />
       {credits?.cast && <Cast data={credits?.cast} loading={creditsLoading} />}
       <VideosSection data={data} loading={loading} />
-      {/* <Similar mediaType={mediaType} id={id} />
-      <Recommendations mediaType={mediaType} id={id} /> */}
+      <Similar mediaType={mediaType} id={id} />
+      <Recommendations mediaType={mediaType} id={id} />
     </div>
   );
 };
