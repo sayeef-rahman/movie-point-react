@@ -9,6 +9,7 @@ import Select from "react-select";
 import Spinner from "../components/spinner/spinner";
 import InfiniteScroll from "react-infinite-scroll-component";
 import MovieCard from "../components/movieCard/movieCard";
+import { useSelector } from "react-redux";
 
 let filters = {};
 
@@ -19,6 +20,7 @@ const Explore = () => {
   const [genre, setGenre] = useState(null);
   const [sortby, setSortby] = useState(null);
   const { mediaType } = useParams();
+  const { genres } = useSelector((state) => state.tmdb);
 
   const { data: genresData } = useFetch(`/genre/${mediaType}/list`);
 
@@ -128,7 +130,7 @@ const Explore = () => {
                 {data?.results?.map((item, index) => {
                   if (item.media_type === "person") return;
                   return (
-                    <MovieCard key={index} data={item} mediaType={mediaType} />
+                    <MovieCard key={index} data={item} mediaType={mediaType} genres={genres}  />
                   );
                 })}
               </InfiniteScroll>

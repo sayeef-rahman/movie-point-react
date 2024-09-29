@@ -14,17 +14,33 @@
     margin-bottom: 25px;
   }
   .content {
-    display: flex;
-    flex-flow: row wrap;
-    gap: 10px;
-    margin-bottom: 50px;
-    @include md {
-      gap: 20px;
-    }
+    // display: flex;
+    // flex-flow: row wrap;
+    // gap: 10px;
+    // margin-bottom: 50px;
+    // @include md {
+    //   gap: 20px;
+    // }
+    // .movieCard {
+    //   .posterBlock {
+    //     margin-bottom: 20px;
+    //   }
+    // }
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column: 1;
+    gap: 16px;
     .movieCard {
+      width: 100%;
       .posterBlock {
         margin-bottom: 20px;
       }
+    }
+    @include md {
+      grid-template-columns: repeat(3, 1fr);
+    }
+    @include lg {
+      grid-template-columns: repeat(4, 1fr);
     }
   }
 }
