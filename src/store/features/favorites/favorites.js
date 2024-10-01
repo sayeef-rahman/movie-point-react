@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const wishListSlice = createSlice({
-  name: "wishList",
-  initialState: null,
+export const favoritesSlice = createSlice({
+  name: "favoritesSlice",
+  initialState: [],
   reducers: {
-    addWishList: (state, action) => {
+    addToFavoriteList: (state, action) => {
       const isExists = state?.some((item) => item?.id === action?.payload?.id);
       if (isExists) {
         return state;
@@ -12,7 +12,7 @@ export const wishListSlice = createSlice({
         return [...state, action?.payload];
       }
     },
-    removeFromWishList: (state, action) => {
+    removeFromFavoriteList: (state, action) => {
       const isExists = state?.some((item) => item?.id === action?.payload?.id);
       if (isExists) {
         const updatedState = state?.filter(
@@ -26,6 +26,7 @@ export const wishListSlice = createSlice({
   },
 });
 
-export const { addWishList, removeFromWishList } = wishListSlice.actions;
+export const { addToFavoriteList, removeFromFavoriteList } =
+  favoritesSlice.actions;
 
-export default wishListSlice.reducer;
+export default favoritesSlice.reducer;

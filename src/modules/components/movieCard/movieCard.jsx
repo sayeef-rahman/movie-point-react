@@ -29,8 +29,7 @@ const MovieCard = ({ data, fromSearch, mediaType, genres }) => {
           navigate("/login");
         }
       });
-    }
-    else {
+    } else {
       navigate(`/${data?.media_type || mediaType}/${data.id}`);
     }
   };
@@ -38,30 +37,16 @@ const MovieCard = ({ data, fromSearch, mediaType, genres }) => {
   const posterUrl = data.poster_path
     ? url.poster + data.poster_path
     : PosterFallback;
-    console.log("data", data);
   return (
     <div className="movieCard" onClick={handleNavigate}>
       <div className="posterBlock">
         <ImageLazyLoading className="posterImg" src={posterUrl} />
-        {/* {!fromSearch && (
-          <React.Fragment>
-            <CircleRating rating={data.vote_average.toFixed(1)} />
-            <Genres data={data.genre_ids.slice(0, 2)} />
-          </React.Fragment>
-        )} */}
       </div>
-      {/* <div className="textBlock">
-        <span className="title">{data.title || data.name}</span>
-        <span className="date">
-          {moment(data.release_date).format("MMM D, YYYY")}
-        </span>
-      </div> */}
       <div className="textBlock">
         <span className="title">{data?.title || data?.name}</span>
         <div className="starRating">
           <span>
-            <FaStar size={16} /> {data?.vote_average?.toFixed(1)}
-            {" "}
+            <FaStar size={16} /> {data?.vote_average?.toFixed(1)}{" "}
             {getFormattedDate(data?.release_date)}
           </span>
         </div>

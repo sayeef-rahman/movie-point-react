@@ -1,21 +1,21 @@
+import moment from "moment";
 import React, { useState } from "react";
+import { BiListPlus } from "react-icons/bi";
+import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
+import { FaRegCirclePlay } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import PosterFallback from "../../../assets/no-poster.png";
-import "./styles.scss";
-import axios from "axios";
-import moment from "moment";
-import { toast } from "react-hot-toast";
-import { BiListPlus } from "react-icons/bi";
-import { FaHeart, FaStar } from "react-icons/fa";
-import { useSelector } from "react-redux";
-import useAuth from "../../../hooks/useAuth/useAuth";
 import useFetch from "../../../hooks/useFetch/userFetch";
-import { ContentWrapper } from "../../utility/components/contentWrapper/contentWrapper";
-import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading";
+import {
+  removeFromFavoriteList,
+  addToFavoriteList,
+} from "../../../store/features/favorites/favorites";
 import Genres from "../../components/geners/geners";
-import CircleRating from "../../components/circleRating/circleRating";
+import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading";
 import VideoPopup from "../../components/videoPopup/videoPopup";
-import { FaRegCirclePlay } from "react-icons/fa6";
+import { ContentWrapper } from "../../utility/components/contentWrapper/contentWrapper";
+import "./styles.scss";
 
 const DetailsBanner = ({ video, crew }) => {
   const [show, setShow] = useState(false);
@@ -23,10 +23,16 @@ const DetailsBanner = ({ video, crew }) => {
   const { mediaType, id } = useParams();
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.tmdb);
-  const { user } = useAuth();
+  const favorites = useSelector((state) => state?.favorites);
+  const dispatch = useDispatch();
 
   const handleFavorite = (favorite) => {
-    console.log(favorite);
+    const isExists = favorites?.some((item) => item?.id === favorite?.id);
+    if (isExists) {
+      dispatch(removeFromFavoriteList(favorite));
+    } else {
+      dispatch(addToFavoriteList(favorite));
+    }
   };
 
   const handleSave = (favorite) => {
@@ -102,7 +108,11 @@ const DetailsBanner = ({ video, crew }) => {
                         onClick={() => handleFavorite(data)}
                         title="favorite"
                       >
-                        <FaHeart className="text-2xl text-red-800" />
+                        {favorites?.some((item) => item?.id === data?.id) ? (
+                          <FaHeart className="text-2xl text-red-800" />
+                        ) : (
+                          <FaRegHeart className="text-2xl text-white" />
+                        )}
                       </button>
                       <button onClick={() => handleSave(data)} title="Save">
                         <BiListPlus className="text-3xl text-purple-600 bg-slate-200 rounded-sm" />
