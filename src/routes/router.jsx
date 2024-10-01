@@ -7,6 +7,7 @@ import Login from "../modules/login/login";
 import DetailsPage from "../pages/detailsPage";
 import ErrorPage from "../pages/errorPage";
 import HomePage from "../pages/homePage";
+import FavoriteVideos from "../modules/favoriteVideos/favoriteVideos";
 
 const router = createBrowserRouter([
   {
@@ -34,10 +35,10 @@ const router = createBrowserRouter([
         path: "/login",
         element: <Login />,
       },
-      // {
-      //   path: "/favorite-videos",
-      //   element: <FavoriteVideos />,
-      // },
+      {
+        path: "/favorites",
+        element: <FavoriteVideos />,
+      },
       // {
       //   path: "watch-later",
       //   element: <WatchLater />,

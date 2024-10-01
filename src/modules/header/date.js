@@ -9,4 +9,9 @@ export const LinkList = [
     value: "tv",
     redirect: "/explore/tv"
   },
+  {
+    label: "Favorites",
+    value: "favorites",
+    redirect: "/favorites"
+  },
 ];

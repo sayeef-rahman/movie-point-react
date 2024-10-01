@@ -10,7 +10,7 @@ import { getFormattedDate } from "../../../utils/methods/getFramttedDate";
 import ImageLazyLoading from "../imageLazyLoading/imageLazyLoading";
 import "./styles.scss";
 
-const MovieCard = ({ data, fromSearch, mediaType, genres }) => {
+const MovieCard = ({ data, fromSearch, mediaType="movie", genres }) => {
   const { url } = useSelector((state) => state.tmdb);
   const navigate = useNavigate();
   const { user } = useAuth();
