@@ -16,6 +16,10 @@ import ImageLazyLoading from "../../components/imageLazyLoading/imageLazyLoading
 import VideoPopup from "../../components/videoPopup/videoPopup";
 import { ContentWrapper } from "../../utility/components/contentWrapper/contentWrapper";
 import "./styles.scss";
+import {
+  addWishList,
+  removeFromWishList,
+} from "../../../store/features/wishList/wishList";
 
 const DetailsBanner = ({ video, crew }) => {
   const [show, setShow] = useState(false);
@@ -24,6 +28,7 @@ const DetailsBanner = ({ video, crew }) => {
   const { data, loading } = useFetch(`/${mediaType}/${id}`);
   const { url } = useSelector((state) => state.tmdb);
   const favorites = useSelector((state) => state?.favorites);
+  const wishList = useSelector((state) => state?.wishList);
   const dispatch = useDispatch();
 
   const handleFavorite = (favorite) => {
@@ -35,8 +40,13 @@ const DetailsBanner = ({ video, crew }) => {
     }
   };
 
-  const handleSave = (favorite) => {
-    console.log(favorite);
+  const handleWishList = (favorite) => {
+    const isExists = favorites?.some((item) => item?.id === favorite?.id);
+    if (isExists) {
+      dispatch(removeFromWishList(favorite));
+    } else {
+      dispatch(addWishList(favorite));
+    }
   };
 
   const genres = data?.genres?.map((g) => g.id);
@@ -114,7 +124,7 @@ const DetailsBanner = ({ video, crew }) => {
                           <FaRegHeart className="text-2xl text-white" />
                         )}
                       </button>
-                      <button onClick={() => handleSave(data)} title="Save">
+                      <button onClick={() => handleWishList(data)} title="Save">
                         <BiListPlus className="text-3xl text-purple-600 bg-slate-200 rounded-sm" />
                       </button>
                     </div>

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const wishListSlice = createSlice({
   name: "wishList",
-  initialState: null,
+  initialState: [],
   reducers: {
     addWishList: (state, action) => {
       const isExists = state?.some((item) => item?.id === action?.payload?.id);
