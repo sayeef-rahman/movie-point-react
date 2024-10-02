@@ -28,7 +28,7 @@ const FavoriteVideos = () => {
             })}
           </>
         ) : (
-          <span className="resultNotFound">Sorry, Results not found!</span>
+          <span className="resultNotFound">Sorry, No favorite tem found!</span>
         )}
       </ContentWrapper>
     </div>
