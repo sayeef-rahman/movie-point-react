@@ -4,18 +4,18 @@ import { ContentWrapper } from "../utility/components/contentWrapper/contentWrap
 import MovieCard from "../components/movieCard/movieCard";
 import { useSelector } from "react-redux";
 
-const WishList = () => {
+const FavoriteVideos = () => {
   const { genres } = useSelector((state) => state.tmdb);
-  const WishLists = useSelector((state) => state?.favorites);
+  const favorites = useSelector((state) => state?.favorites);
   return (
     <div className="explorePage">
       <ContentWrapper>
         <div className="pageHeader">
           <div className="pageTitle">Favorites List</div>
         </div>
-        {WishLists?.length > 0 ? (
+        {favorites?.length > 0 ? (
           <>
-            {WishLists?.map((item, index) => {
+            {favorites?.map((item, index) => {
               if (item.media_type === "person") return;
               return (
                 <MovieCard
@@ -35,4 +35,4 @@ const WishList = () => {
   );
 };
 
-export default WishList;
+export default FavoriteVideos;
